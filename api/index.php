@@ -4,14 +4,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 try {
-    // Buat direktori temporer yang diizinkan Vercel
+    $tmpStorage = '/tmp/storage';
     $storagePaths = [
-        '/tmp/storage/framework/views',
-        '/tmp/storage/framework/plugins',
-        '/tmp/storage/framework/sessions',
-        '/tmp/storage/framework/cache',
-        '/tmp/storage/bootstrap/cache',
-        '/tmp/storage/logs',
+        $tmpStorage . '/framework/views',
+        $tmpStorage . '/framework/sessions',
+        $tmpStorage . '/framework/cache',
+        $tmpStorage . '/framework/testing',
+        $tmpStorage . '/logs',
+        $tmpStorage . '/bootstrap/cache',
     ];
 
     foreach ($storagePaths as $path) {
@@ -20,15 +20,31 @@ try {
         }
     }
 
-    // Alihkan environment path Laravel ke /tmp agar bisa menulis file/log
-    putenv('APP_STORAGE=/tmp/storage');
-    putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
-    
-    // Paksa jalur log agar masuk ke direktori /tmp yang bisa ditulis
-    $_M = $_SERVER;
+    putenv('APP_STORAGE=' . $tmpStorage);
+    putenv('VIEW_COMPILED_PATH=' . $tmpStorage . '/framework/views');
     $_ENV['LOG_CHANNEL'] = 'errorlog';
 
-    require __DIR__ . '/../public/index.php';
+    // Autoload Composer
+    require __DIR__ . '/../vendor/autoload.php';
+
+    // Inisialisasi Aplikasi Laravel
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
+
+    // Register ulang Service Provider inti agar class [view] dan core services terdaftar
+    $app->register(\Illuminate\View\ViewServiceProvider::class);
+    $app->register(\Illuminate\Events\EventServiceProvider::class);
+    $app->register(\Illuminate\Routing\RoutingServiceProvider::class);
+
+    // Jalankan Request melalui HTTP Kernel
+    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+    $response = $kernel->handle(
+        $request = Illuminate\Http\Request::capture()
+    );
+
+    $response->send();
+
+    $kernel->terminate($request, $response);
 
 } catch (\Throwable $e) {
     echo '<h1 style="color: red;">Terjadi Kesalahan Server (PHP Exception):</h1>';
