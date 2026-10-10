@@ -5,13 +5,14 @@ ini_set('display_errors', '1');
 
 try {
     $tmpStorage = '/tmp/storage';
+    $tmpBootstrapCache = '/tmp/bootstrap/cache';
+
     $storagePaths = [
         $tmpStorage . '/framework/views',
         $tmpStorage . '/framework/sessions',
         $tmpStorage . '/framework/cache',
-        $tmpStorage . '/framework/testing',
         $tmpStorage . '/logs',
-        $tmpStorage . '/bootstrap/cache',
+        $tmpBootstrapCache,
     ];
 
     foreach ($storagePaths as $path) {
@@ -30,11 +31,8 @@ try {
     // Inisialisasi Aplikasi Laravel
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // Register provider inti yang dibutuhkan Laravel di serverless
-    $app->register(\Illuminate\Filesystem\FilesystemServiceProvider::class);
-    $app->register(\Illuminate\View\ViewServiceProvider::class);
-    $app->register(\Illuminate\Events\EventServiceProvider::class);
-    $app->register(\Illuminate\Routing\RoutingServiceProvider::class);
+    // Paksa Laravel menggunakan direktori cache di /tmp
+    $app->useBootstrapPath('/tmp');
 
     // Jalankan Request melalui HTTP Kernel
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
