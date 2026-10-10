@@ -30,7 +30,8 @@ try {
     // Inisialisasi Aplikasi Laravel
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // Register ulang Service Provider inti agar class [view] dan core services terdaftar
+    // Register provider inti yang dibutuhkan Laravel di serverless
+    $app->register(\Illuminate\Filesystem\FilesystemServiceProvider::class);
     $app->register(\Illuminate\View\ViewServiceProvider::class);
     $app->register(\Illuminate\Events\EventServiceProvider::class);
     $app->register(\Illuminate\Routing\RoutingServiceProvider::class);
