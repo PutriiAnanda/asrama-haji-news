@@ -1,6 +1,10 @@
 <?php
 
-// Pastikan direktori storage darurat tersedia di lingkungan serverless
+// Aktifkan pelaporan error agar terlihat di browser
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $storagePaths = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/plugins',
