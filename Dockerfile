@@ -1,6 +1,6 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-# Install dependensi sistem yang dibutuhkan
+# Install dependensi sistem yang dibutuhkan PHP & Filament
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
@@ -15,15 +15,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure intl \
     && docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip intl
-
-# Atur DocumentRoot Apache ke folder public Laravel
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
-
-# HAPUS PAKSA MPM GANDA DI APACHE
-RUN rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* \
-    && a2enmod mpm_prefork rewrite
 
 # Ambil Composer resmi
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -41,5 +32,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-# Script startup untuk mengarahkan Apache ke PORT dari Railway
-CMD sed -i "s/80/${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && apache2-foreground
+# Jalankan server Laravel secara langsung menyesuaikan PORT dari Railway
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
