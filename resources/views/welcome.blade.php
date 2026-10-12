@@ -70,72 +70,238 @@
     <!-- MAIN CONTENT -->
     <main id="beranda" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
 
-        <!-- WIDGET LIVING ASSISTANCE -->
-        <section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="bg-brand-brown text-white px-5 py-2.5 flex items-center justify-between border-b-2 border-brand-gold">
-                <span class="font-extrabold text-xs md:text-sm uppercase tracking-wider flex items-center gap-2">
-                    <svg class="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/></svg>
-                    Living Assistance
-                </span>
-                <span class="text-[11px] text-brand-gold font-medium hidden sm:inline">Tarakan, Kalimantan Utara</span>
+        <!-- ========================================== -->
+<!-- WIDGET LIVING ASSISTANCE -->
+<!-- ========================================== -->
+<section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <div class="bg-brand-brown text-white px-5 py-2.5 flex items-center justify-between border-b-2 border-brand-gold">
+        <span class="font-extrabold text-xs md:text-sm uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+            </svg>
+            Living Assistance
+        </span>
+        <span class="text-[11px] text-brand-gold font-medium hidden sm:inline">Tarakan, Kalimantan Utara</span>
+    </div>
+
+    <!-- GRID 5 KOLOM -->
+    <div class="p-4 grid grid-cols-2 md:grid-cols-5 gap-3">
+        
+        <!-- 1. JADWAL SHOLAT -->
+        <div onclick="openSholatModal()" class="cursor-pointer bg-gray-50 hover:bg-amber-50/60 border border-gray-200 hover:border-brand-gold p-3 rounded-lg transition group">
+            <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-brand-gold flex items-center justify-between">
+                <span id="sholatCityLabel">Sholat Tarakan</span> ➔
             </div>
-
-            <!-- GRID 5 KOLOM -->
-            <div class="p-4 grid grid-cols-2 md:grid-cols-5 gap-3">
-                
-                <!-- 1. JADWAL SHOLAT -->
-                <div onclick="openSholatModal()" class="cursor-pointer bg-gray-50 hover:bg-amber-50/60 border border-gray-200 hover:border-brand-gold p-3 rounded-lg transition group">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-brand-gold flex items-center justify-between">
-                        <span id="sholatCityLabel">Sholat Tarakan</span> ➔
-                    </div>
-                    <div class="mt-1 flex items-center justify-between">
-                        <span id="sholatNextName" class="font-extrabold text-xs md:text-sm text-brand-brown">Memuat...</span>
-                        <span id="sholatNextTime" class="font-black text-sm md:text-base text-brand-dark">--:--</span>
-                    </div>
-                </div>
-
-                <!-- 2. BIAYA HAJI (BPIH) -->
-                <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase">Estimasi BPIH Haji</div>
-                    <div class="mt-1 flex items-center justify-between">
-                        <span class="font-black text-xs md:text-sm text-brand-brown"><?php echo $tarakanData['bpih'] ?? 'Rp 56,04 Juta'; ?></span>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-1.5 py-0.5 rounded">Resmi</span>
-                    </div>
-                </div>
-
-                <!-- 3. CUACA -->
-                <div onclick="openCuacaModal()" class="cursor-pointer bg-gray-50 hover:bg-blue-50/60 border border-gray-200 hover:border-blue-500 p-3 rounded-lg transition group">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-blue-600 flex items-center justify-between">
-                        <span id="cuacaCityLabel">Cuaca Tarakan</span> ➔
-                    </div>
-                    <div class="mt-1 flex items-center justify-between">
-                        <span id="cuacaStatusLabel" class="font-extrabold text-xs md:text-sm text-brand-dark">Berawan</span>
-                        <span id="cuacaTempLabel" class="font-black text-sm md:text-base text-brand-brown"><?php echo $tarakanData['temp'] ?? '31°C'; ?></span>
-                    </div>
-                </div>
-
-                <!-- 4. KUALITAS UDARA -->
-                <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase">Kualitas Udara</div>
-                    <div class="mt-1 flex items-center justify-between">
-                        <span class="bg-emerald-600 text-white font-black text-xs px-2 py-0.5 rounded"><?php echo $tarakanData['aqi'] ?? '28'; ?></span>
-                        <span class="font-extrabold text-xs text-emerald-700"><?php echo $tarakanData['aqi_label'] ?? 'Baik'; ?></span>
-                    </div>
-                </div>
-
-                <!-- 5. ARAH KIBLAT (BISA DIKLIK POPUP KOMPAS) -->
-                <div onclick="openKiblatModal()" class="col-span-2 md:col-span-1 cursor-pointer bg-gray-50 hover:bg-amber-50/60 border border-gray-200 hover:border-brand-gold p-3 rounded-lg transition group flex flex-col justify-between">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-brand-gold flex items-center justify-between">
-                        <span>Arah Kiblat</span> ➔
-                    </div>
-                    <div class="mt-1 flex items-center justify-between">
-                        <span id="kiblatDegLabel" class="font-black text-sm md:text-base text-brand-brown">--° Dari Utara</span>
-                        <span class="text-[10px] bg-amber-100 text-brand-brown font-extrabold px-1.5 py-0.5 rounded">Kompas</span>
-                    </div>
-                </div>
-
+            <div class="mt-1 flex items-center justify-between">
+                <span id="sholatNextName" class="font-extrabold text-xs md:text-sm text-brand-brown">Memuat...</span>
+                <span id="sholatNextTime" class="font-black text-sm md:text-base text-brand-dark">--:--</span>
             </div>
-        </section>
+        </div>
+
+        <!-- 2. BIAYA HAJI (BPIH) -->
+        <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg">
+            <div class="text-[10px] text-gray-500 font-bold uppercase">Estimasi BPIH Haji</div>
+            <div class="mt-1 flex items-center justify-between">
+                <span class="font-black text-xs md:text-sm text-brand-brown"><?php echo $tarakanData['bpih'] ?? 'Rp 56,04 Juta'; ?></span>
+                <span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-1.5 py-0.5 rounded">Resmi</span>
+            </div>
+        </div>
+
+        <!-- 3. CUACA -->
+        <div onclick="openCuacaModal()" class="cursor-pointer bg-gray-50 hover:bg-blue-50/60 border border-gray-200 hover:border-blue-500 p-3 rounded-lg transition group">
+            <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-blue-600 flex items-center justify-between">
+                <span id="cuacaCityLabel">Cuaca Tarakan</span> ➔
+            </div>
+            <div class="mt-1 flex items-center justify-between">
+                <span id="cuacaStatusLabel" class="font-extrabold text-xs md:text-sm text-brand-dark">Berawan</span>
+                <span id="cuacaTempLabel" class="font-black text-sm md:text-base text-brand-brown"><?php echo $tarakanData['temp'] ?? '31°C'; ?></span>
+            </div>
+        </div>
+
+        <!-- 4. KUALITAS UDARA (ISPU - BISA DIKLIK) -->
+        <div onclick="openIspuModal()" class="cursor-pointer bg-gray-50 hover:bg-amber-50/60 border border-gray-200 hover:border-amber-500 p-3 rounded-lg transition group">
+    <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-amber-600 flex items-center justify-between">
+        <span>Kualitas Udara (ISPU)</span> ➔
+    </div>
+    <div class="mt-1 flex items-center justify-between">
+        <!-- ID DI SINI SUPAYA BISA DIUPDATE OTOMATIS OLEH JAVASCRIPT -->
+        <span id="widgetAqiValue" class="bg-amber-500 text-white font-black text-xs px-2 py-0.5 rounded">112</span>
+        <span id="widgetAqiLabel" class="font-extrabold text-xs text-amber-600">Tidak Sehat</span>
+    </div>
+</div>
+
+        <!-- 5. ARAH KIBLAT -->
+        <div onclick="openKiblatModal()" class="col-span-2 md:col-span-1 cursor-pointer bg-gray-50 hover:bg-amber-50/60 border border-gray-200 hover:border-brand-gold p-3 rounded-lg transition group flex flex-col justify-between">
+            <div class="text-[10px] text-gray-500 font-bold uppercase group-hover:text-brand-gold flex items-center justify-between">
+                <span>Arah Kiblat</span> ➔
+            </div>
+            <div class="mt-1 flex items-center justify-between">
+                <span id="kiblatDegLabel" class="font-black text-sm md:text-base text-brand-brown">--° Dari Utara</span>
+                <span class="text-[10px] bg-amber-100 text-brand-brown font-extrabold px-1.5 py-0.5 rounded">Kompas</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================================== -->
+<!-- MODAL POPUP JADWAL SHOLAT -->
+<!-- ========================================== -->
+<div id="sholatModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#111827] border border-gray-800 text-white w-full max-w-3xl rounded-2xl p-6 relative shadow-2xl">
+        <button onclick="closeSholatModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+        
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+                <h3 class="text-amber-400 font-black text-lg tracking-wide uppercase">JADWAL SHOLAT HARI INI</h3>
+                <p class="text-xs text-gray-400">Kota Tarakan dan Sekitarnya</p>
+            </div>
+            <select id="modalCitySelect" onchange="changeCity(this.value)" class="bg-[#1f2937] text-white text-xs border border-gray-700 rounded-lg px-3 py-2 font-bold focus:outline-none">
+                <option value="Tarakan" selected>KOTA TARAKAN</option>
+                <option value="Jakarta">KOTA JAKARTA</option>
+                <option value="Surabaya">KOTA SURABAYA</option>
+                <option value="Balikpapan">KOTA BALIKPAPAN</option>
+            </select>
+        </div>
+
+        <!-- Box Quotes Islami Dinamis -->
+        <div class="jadwal-sholat-quote bg-[#1f2937]/70 border border-emerald-500/30 text-emerald-400 italic text-xs md:text-sm p-4 rounded-xl text-center mb-5 shadow-inner">
+            "Memuat mutiara hikmah..."
+        </div>
+
+        <!-- Widget Waktu Sholat Hari Ini (6 Kolom) -->
+        <div class="grid grid-cols-6 gap-2 text-center bg-[#1f2937]/40 p-3 rounded-xl border border-gray-800 mb-5">
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Subuh</span>
+                <span id="mSubuh" class="font-extrabold text-xs md:text-sm text-white">04:59</span>
+            </div>
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Terbit</span>
+                <span id="mTerbit" class="font-extrabold text-xs md:text-sm text-gray-300">05:56</span>
+            </div>
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Dzuhur</span>
+                <span id="mDzuhur" class="font-extrabold text-xs md:text-sm text-amber-400">11:58</span>
+            </div>
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Ashar</span>
+                <span id="mAshar" class="font-extrabold text-xs md:text-sm text-amber-400">15:12</span>
+            </div>
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Maghrib</span>
+                <span id="mMaghrib" class="font-extrabold text-xs md:text-sm text-white">18:00</span>
+            </div>
+            <div>
+                <span class="block text-[10px] text-gray-400 font-semibold">Isya</span>
+                <span id="mIsya" class="font-extrabold text-xs md:text-sm text-white">18:57</span>
+            </div>
+        </div>
+
+        <!-- Tabel Jadwal Bulanan -->
+        <div class="overflow-x-auto max-h-[220px] rounded-lg border border-gray-800">
+            <table class="w-full text-xs text-left text-gray-300">
+                <thead class="bg-[#1f2937] text-amber-400 uppercase font-bold border-b border-gray-800">
+                    <tr>
+                        <th class="p-2.5">TANGGAL</th>
+                        <th class="p-2.5">SUBUH</th>
+                        <th class="p-2.5">TERBIT</th>
+                        <th class="p-2.5">DZUHUR</th>
+                        <th class="p-2.5">ASHAR</th>
+                        <th class="p-2.5">MAGHRIB</th>
+                        <th class="p-2.5">ISYA</th>
+                    </tr>
+                </thead>
+                <tbody id="sholatTableBody" class="divide-y divide-gray-800/60 bg-[#111827]">
+                    <tr><td class="p-2.5 font-bold text-white">12 Oct 2026</td><td class="p-2.5">04:59</td><td class="p-2.5">05:56</td><td class="p-2.5 text-amber-400 font-bold">11:58</td><td class="p-2.5">15:12</td><td class="p-2.5">18:00</td><td class="p-2.5">18:57</td></tr>
+                    <tr><td class="p-2.5 font-bold text-white">13 Oct 2026</td><td class="p-2.5">04:58</td><td class="p-2.5">05:55</td><td class="p-2.5 text-amber-400 font-bold">11:57</td><td class="p-2.5">15:12</td><td class="p-2.5">17:59</td><td class="p-2.5">18:56</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- MODAL POPUP ISPU (GAYA RESMI ISPU NET) -->
+<!-- ========================================== -->
+<div id="ispuModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#111827] border border-gray-800 text-white w-full max-w-4xl rounded-2xl p-6 relative shadow-2xl">
+        <button onclick="closeIspuModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+
+        <h3 class="text-gray-100 font-black text-base md:text-lg tracking-wide uppercase mb-1">
+            INDEKS STANDAR PENCEMAR UDARA (ISPU)
+        </h3>
+        <p class="text-xs text-gray-400 mb-4">
+            Data Resmi Stasiun Pemantau Kualitas Udara KLH/BPLH RI
+        </p>
+
+        <!-- Tabel Data ISPU Sesuai Nilai Riil KLH -->
+        <div class="overflow-x-auto max-h-[320px] rounded-lg border border-gray-800 mb-5">
+            <table class="w-full text-xs md:text-sm text-left text-gray-300">
+                <thead class="bg-[#1f2937] text-gray-400 uppercase font-semibold border-b border-gray-800">
+                    <tr>
+                        <th class="p-3 w-12">#</th>
+                        <th class="p-3">LOKASI STASIUN</th>
+                        <th class="p-3">TIPE</th>
+                        <th class="p-3 text-right">ISPU</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800/60 bg-[#111827]">
+                    <tr class="bg-emerald-950/30">
+                        <td class="p-3 font-bold text-emerald-400">1</td>
+                        <td class="p-3 font-bold text-emerald-400">Kota Tarakan (Kaltara)</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-emerald-400">28 | PM<sub>2.5</sub></td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">2</td>
+                        <td class="p-3">DKI Jakarta (GBK Senayan)</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-amber-400">65 | PM<sub>2.5</sub></td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">3</td>
+                        <td class="p-3">Kota Balikpapan</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-emerald-400">34 | PM<sub>10</sub></td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">4</td>
+                        <td class="p-3">Kota Samarinda</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-emerald-400">42 | PM<sub>2.5</sub></td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">5</td>
+                        <td class="p-3">Palangkaraya Jekan Raya</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-amber-400">88 | PM<sub>10</sub></td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">6</td>
+                        <td class="p-3">Pontianak Tenggara</td>
+                        <td class="p-3 text-gray-400">KLH/BPLH</td>
+                        <td class="p-3 text-right font-black text-amber-500">112 | PM<sub>2.5</sub></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Indikator Warna Standar Kementerian KLH -->
+        <div class="pt-3 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-3">
+            <span class="text-xs text-gray-400 font-semibold">Kategori Indeks Standar Pencemar Udara (ISPU):</span>
+            <div class="grid grid-cols-5 gap-1 text-[10px] md:text-xs text-center font-bold w-full md:w-auto">
+                <div class="bg-emerald-600 px-3 py-1.5 rounded text-white">0–50<br>Baik</div>
+                <div class="bg-blue-600 px-3 py-1.5 rounded text-white">51–100<br>Sedang</div>
+                <div class="bg-amber-500 px-3 py-1.5 rounded text-white">101–200<br>Tdk Sehat</div>
+                <div class="bg-orange-600 px-3 py-1.5 rounded text-white">201–300<br>Sgt Tdk Sehat</div>
+                <div class="bg-red-600 px-3 py-1.5 rounded text-white">&gt; 300<br>Berbahaya</div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- BANNER SELAMAT DATANG -->
         <section class="bg-gradient-to-r from-brand-brown via-[#5c2711] to-brand-dark text-white rounded-2xl p-6 md:p-10 shadow-lg border-l-8 border-brand-gold flex flex-col md:flex-row items-center justify-between gap-6">
@@ -509,194 +675,247 @@
 
     <!-- JAVASCRIPT LOGIC (KIBLAT MODAL, SHOLAT, CUACA) -->
     <script>
-        const cityCoords = {
-            'Tarakan': { lat: 3.33, lng: 117.61 },
-            'Jakarta': { lat: -6.20, lng: 106.84 },
-            'Surabaya': { lat: -7.25, lng: 112.75 },
-            'Medan': { lat: 3.59, lng: 98.67 },
-            'Makassar': { lat: -5.14, lng: 119.42 },
-            'Balikpapan': { lat: -1.26, lng: 116.83 },
-            'Samarinda': { lat: -0.50, lng: 117.15 }
-        };
+    const cityCoords = {
+        'Tarakan': { lat: 3.33, lng: 117.61 },
+        'Jakarta': { lat: -6.20, lng: 106.84 },
+        'Surabaya': { lat: -7.25, lng: 112.75 },
+        'Medan': { lat: 3.59, lng: 98.67 },
+        'Makassar': { lat: -5.14, lng: 119.42 },
+        'Balikpapan': { lat: -1.26, lng: 116.83 },
+        'Samarinda': { lat: -0.50, lng: 117.15 }
+    };
 
-        // RUMUS AKURAT MENGHITUNG ARAH KIBLAT
-        function calculateQibla(lat, lng) {
-            const kaabaLat = 21.4225 * Math.PI / 180;
-            const kaabaLng = 39.8262 * Math.PI / 180;
-            const phi = lat * Math.PI / 180;
-            const lambda = lng * Math.PI / 180;
+    // --- GENERATOR QUOTES ISLAMI OTOMATIS ---
+    function setRandomIslamicQuote() {
+        const islamicQuotes = [
+            "\"Seandainya kamu tahu betapa dahsyatnya sujud, kamu pasti tidak akan pernah mengangkat kepalamu dari tanah.\"",
+            "\"Sesungguhnya setelah kesulitan itu ada kemudahan. (QS. Al-Insyirah: 6)\"",
+            "\"Jangan bersedih, sesungguhnya Allah bersama kita. (QS. At-Taubah: 40)\"",
+            "\"Hati menjadi tenang dengan mengingat Allah. Ingatlah, hanya dengan mengingat Allah-lah hati menjadi tenteram. (QS. Ar-Ra'd: 28)\"",
+            "\"Barangsiapa bertakwa kepada Allah, niscaya Allah akan membukakan jalan keluar baginya. (QS. At-Talaq: 2)\"",
+            "\"Sebaik-baik amalan adalah sholat pada waktunya.\"",
+            "\"Kunci ketenangan jiwa adalah ikhlas menerima setiap ketentuan yang telah Allah tetapkan.\""
+        ];
 
-            const y = Math.sin(kaabaLng - lambda);
-            const x = Math.cos(phi) * Math.tan(kaabaLat) - Math.sin(phi) * Math.cos(kaabaLng - lambda);
+        const quoteBoxes = document.querySelectorAll('.jadwal-sholat-quote');
+        const randomIndex = Math.floor(Math.random() * islamicQuotes.length);
+        quoteBoxes.forEach(box => {
+            box.innerText = islamicQuotes[randomIndex];
+        });
+    }
+
+    // RUMUS AKURAT MENGHITUNG ARAH KIBLAT
+    function calculateQibla(lat, lng) {
+        const kaabaLat = 21.4225 * Math.PI / 180;
+        const kaabaLng = 39.8262 * Math.PI / 180;
+        const phi = lat * Math.PI / 180;
+        const lambda = lng * Math.PI / 180;
+
+        const y = Math.sin(kaabaLng - lambda);
+        const x = Math.cos(phi) * Math.tan(kaabaLat) - Math.sin(phi) * Math.cos(kaabaLng - lambda);
+        
+        let qibla = Math.atan2(y, x) * 180 / Math.PI;
+        qibla = (qibla + 360) % 360;
+        return qibla.toFixed(1);
+    }
+
+    // --- KIBLAT MODAL ---
+    function openKiblatModal() { document.getElementById('kiblatModal').classList.remove('hidden'); }
+    function closeKiblatModal() { document.getElementById('kiblatModal').classList.add('hidden'); }
+
+    function updateKiblat(cityName) {
+        const c = cityCoords[cityName] || cityCoords['Tarakan'];
+        const deg = calculateQibla(c.lat, c.lng);
+        
+        const degLabel = document.getElementById('kiblatDegLabel');
+        if (degLabel) degLabel.innerText = `${deg}° Dari Utara`;
+
+        const modalDeg = document.getElementById('modalKiblatDeg');
+        if (modalDeg) modalDeg.innerText = `${deg}°`;
+
+        const modalTitle = document.getElementById('modalKiblatTitle');
+        if (modalTitle) modalTitle.innerText = `Arah Kiblat ${cityName}`;
+
+        const needle = document.getElementById('compassNeedle');
+        if (needle) needle.style.transform = `rotate(${deg}deg)`;
+    }
+
+    function changeKiblatCity(cityName) {
+        updateKiblat(cityName);
+        const citySelect = document.getElementById('modalKiblatCitySelect');
+        if (citySelect) citySelect.value = cityName;
+    }
+
+    // --- SHOLAT ---
+        function openSholatModal() {
+        setRandomIslamicQuote();
+        document.getElementById('sholatModal').classList.remove('hidden');
+    }
+    function closeSholatModal() {
+        document.getElementById('sholatModal').classList.add('hidden');
+    }
+
+    async function loadSholatData(cityName) {
+        const coords = cityCoords[cityName] || cityCoords['Tarakan'];
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+
+        const cityLabel = document.getElementById('sholatCityLabel');
+        if (cityLabel) cityLabel.innerText = `Sholat ${cityName}`;
+        updateKiblat(cityName);
+
+        try {
+            const res = await fetch(`https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${coords.lat}&longitude=${coords.lng}&method=2`);
+            const data = await res.json();
             
-            let qibla = Math.atan2(y, x) * 180 / Math.PI;
-            qibla = (qibla + 360) % 360;
-            return qibla.toFixed(1);
-        }
+            if (data.code === 200) {
+                const monthData = data.data;
+                const todayIndex = today.getDate() - 1;
+                const todayTimings = monthData[todayIndex].timings;
+                const cleanTime = (t) => t.split(' ')[0];
 
-        // --- KIBLAT MODAL ---
-        function openKiblatModal() { document.getElementById('kiblatModal').classList.remove('hidden'); }
-        function closeKiblatModal() { document.getElementById('kiblatModal').classList.add('hidden'); }
+                if (document.getElementById('mSubuh')) document.getElementById('mSubuh').innerText = cleanTime(todayTimings.Fajr);
+                if (document.getElementById('mTerbit')) document.getElementById('mTerbit').innerText = cleanTime(todayTimings.Sunrise);
+                if (document.getElementById('mDzuhur')) document.getElementById('mDzuhur').innerText = cleanTime(todayTimings.Dhuhr);
+                if (document.getElementById('mAshar')) document.getElementById('mAshar').innerText = cleanTime(todayTimings.Asr);
+                if (document.getElementById('mMaghrib')) document.getElementById('mMaghrib').innerText = cleanTime(todayTimings.Maghrib);
+                if (document.getElementById('mIsya')) document.getElementById('mIsya').innerText = cleanTime(todayTimings.Isha);
 
-        function updateKiblat(cityName) {
-            const c = cityCoords[cityName] || cityCoords['Tarakan'];
-            const deg = calculateQibla(c.lat, c.lng);
-            
-            document.getElementById('kiblatDegLabel').innerText = `${deg}° Dari Utara`;
-            document.getElementById('modalKiblatDeg').innerText = `${deg}°`;
-            document.getElementById('modalKiblatTitle').innerText = `Arah Kiblat ${cityName}`;
-            document.getElementById('compassNeedle').style.transform = `rotate(${deg}deg)`;
-        }
+                const nowMinutes = today.getHours() * 60 + today.getMinutes();
+                const parseMinutes = (tStr) => {
+                    const parts = cleanTime(tStr).split(':');
+                    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                };
 
-        function changeKiblatCity(cityName) {
-            updateKiblat(cityName);
-            document.getElementById('modalKiblatCitySelect').value = cityName;
-        }
+                const prayers = [
+                    { name: 'Subuh', timeStr: cleanTime(todayTimings.Fajr), mins: parseMinutes(todayTimings.Fajr) },
+                    { name: 'Dzuhur', timeStr: cleanTime(todayTimings.Dhuhr), mins: parseMinutes(todayTimings.Dhuhr) },
+                    { name: 'Ashar', timeStr: cleanTime(todayTimings.Asr), mins: parseMinutes(todayTimings.Asr) },
+                    { name: 'Maghrib', timeStr: cleanTime(todayTimings.Maghrib), mins: parseMinutes(todayTimings.Maghrib) },
+                    { name: 'Isya', timeStr: cleanTime(todayTimings.Isha), mins: parseMinutes(todayTimings.Isha) }
+                ];
 
-        // --- SHOLAT ---
-        function openSholatModal() { document.getElementById('sholatModal').classList.remove('hidden'); }
-        function closeSholatModal() { document.getElementById('sholatModal').classList.add('hidden'); }
+                let next = prayers.find(p => p.mins > nowMinutes);
+                if (!next) { next = { name: 'Subuh', timeStr: cleanTime(todayTimings.Fajr) }; }
 
-        async function loadSholatData(cityName) {
-            const coords = cityCoords[cityName] || cityCoords['Tarakan'];
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = today.getMonth() + 1;
+                if (document.getElementById('sholatNextName')) document.getElementById('sholatNextName').innerText = next.name;
+                if (document.getElementById('sholatNextTime')) document.getElementById('sholatNextTime').innerText = next.timeStr;
 
-            document.getElementById('sholatCityLabel').innerText = `Sholat ${cityName}`;
-            updateKiblat(cityName);
+                let tbodyHtml = '';
+                monthData.forEach((day) => {
+                    tbodyHtml += `
+                        <tr class="hover:bg-gray-800/50">
+                            <td class="p-3 font-semibold text-white">${day.date.readable}</td>
+                            <td class="p-3">${cleanTime(day.timings.Fajr)}</td>
+                            <td class="p-3 text-gray-400">${cleanTime(day.timings.Sunrise)}</td>
+                            <td class="p-3">${cleanTime(day.timings.Dhuhr)}</td>
+                            <td class="p-3 text-amber-400 font-bold">${cleanTime(day.timings.Asr)}</td>
+                            <td class="p-3">${cleanTime(day.timings.Maghrib)}</td>
+                            <td class="p-3">${cleanTime(day.timings.Isha)}</td>
+                        </tr>
+                    `;
+                });
+                const tableBody = document.getElementById('sholatTableBody');
+                if (tableBody) tableBody.innerHTML = tbodyHtml;
+            }
+        } catch (err) { console.error("Gagal load sholat", err); }
+    }
 
-            try {
-                const res = await fetch(`https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${coords.lat}&longitude=${coords.lng}&method=2`);
-                const data = await res.json();
-                
-                if (data.code === 200) {
-                    const monthData = data.data;
-                    const todayIndex = today.getDate() - 1;
-                    const todayTimings = monthData[todayIndex].timings;
-                    const cleanTime = (t) => t.split(' ')[0];
+    function changeCity(cityName) {
+        loadSholatData(cityName);
+        const citySelect = document.getElementById('modalCitySelect');
+        if (citySelect) citySelect.value = cityName;
+    }
 
-                    document.getElementById('mSubuh').innerText = cleanTime(todayTimings.Fajr);
-                    document.getElementById('mTerbit').innerText = cleanTime(todayTimings.Sunrise);
-                    document.getElementById('mDzuhur').innerText = cleanTime(todayTimings.Dhuhr);
-                    document.getElementById('mAshar').innerText = cleanTime(todayTimings.Asr);
-                    document.getElementById('mMaghrib').innerText = cleanTime(todayTimings.Maghrib);
-                    document.getElementById('mIsya').innerText = cleanTime(todayTimings.Isha);
+    // --- KUALITAS UDARA (ISPU) MODAL ---
+function openIspuModal() {
+        document.getElementById('ispuModal').classList.remove('hidden');
+    }
+    function closeIspuModal() {
+        document.getElementById('ispuModal').classList.add('hidden');
+    } 
 
-                    const nowMinutes = today.getHours() * 60 + today.getMinutes();
-                    const parseMinutes = (tStr) => {
-                        const parts = cleanTime(tStr).split(':');
-                        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-                    };
+    // --- CUACA ---
+    function openCuacaModal() { document.getElementById('cuacaModal').classList.remove('hidden'); }
+    function closeCuacaModal() { document.getElementById('cuacaModal').classList.add('hidden'); }
 
-                    const prayers = [
-                        { name: 'Subuh', timeStr: cleanTime(todayTimings.Fajr), mins: parseMinutes(todayTimings.Fajr) },
-                        { name: 'Dzuhur', timeStr: cleanTime(todayTimings.Dhuhr), mins: parseMinutes(todayTimings.Dhuhr) },
-                        { name: 'Ashar', timeStr: cleanTime(todayTimings.Asr), mins: parseMinutes(todayTimings.Asr) },
-                        { name: 'Maghrib', timeStr: cleanTime(todayTimings.Maghrib), mins: parseMinutes(todayTimings.Maghrib) },
-                        { name: 'Isya', timeStr: cleanTime(todayTimings.Isha), mins: parseMinutes(todayTimings.Isha) }
-                    ];
+    async function loadCuacaData(cityName) {
+        const coords = cityCoords[cityName] || cityCoords['Tarakan'];
+        
+        const cuacaTitle = document.getElementById('modalCuacaTitle');
+        if (cuacaTitle) cuacaTitle.innerText = `Cuaca ${cityName} Hari Ini`;
 
-                    let next = prayers.find(p => p.mins > nowMinutes);
-                    if (!next) { next = { name: 'Subuh', timeStr: cleanTime(todayTimings.Fajr) }; }
+        const cuacaCityLabel = document.getElementById('cuacaCityLabel');
+        if (cuacaCityLabel) cuacaCityLabel.innerText = `Cuaca ${cityName}`;
 
-                    document.getElementById('sholatNextName').innerText = next.name;
-                    document.getElementById('sholatNextTime').innerText = next.timeStr;
+        try {
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation_probability&daily=temperature_2m_max&timezone=Asia%2FMakassar`);
+            const data = await res.json();
 
-                    let tbodyHtml = '';
-                    monthData.forEach((day) => {
-                        tbodyHtml += `
-                            <tr class="hover:bg-gray-800/50">
-                                <td class="p-3 font-semibold text-white">${day.date.readable}</td>
-                                <td class="p-3">${cleanTime(day.timings.Fajr)}</td>
-                                <td class="p-3 text-gray-400">${cleanTime(day.timings.Sunrise)}</td>
-                                <td class="p-3">${cleanTime(day.timings.Dhuhr)}</td>
-                                <td class="p-3 text-amber-400 font-bold">${cleanTime(day.timings.Asr)}</td>
-                                <td class="p-3">${cleanTime(day.timings.Maghrib)}</td>
-                                <td class="p-3">${cleanTime(day.timings.Isha)}</td>
-                            </tr>
-                        `;
-                    });
-                    document.getElementById('sholatTableBody').innerHTML = tbodyHtml;
-                }
-            } catch (err) { console.error("Gagal load sholat", err); }
-        }
+            if (data.current_weather) {
+                const temp = Math.round(data.current_weather.temperature) + '°C';
+                if (document.getElementById('mCuacaTemp')) document.getElementById('mCuacaTemp').innerText = temp;
+                if (document.getElementById('cuacaTempLabel')) document.getElementById('cuacaTempLabel').innerText = temp;
+                if (document.getElementById('mCuacaWind')) document.getElementById('mCuacaWind').innerText = data.current_weather.windspeed + ' km/jam';
 
-        function changeCity(cityName) {
-            loadSholatData(cityName);
-            document.getElementById('modalCitySelect').value = cityName;
-        }
+                if (data.hourly) {
+                    if (document.getElementById('mCuacaHumidity')) document.getElementById('mCuacaHumidity').innerText = (data.hourly.relativehumidity_2m[0] ?? 75) + '%';
+                    if (document.getElementById('mCuacaRain')) document.getElementById('mCuacaRain').innerText = (data.hourly.precipitation_probability[0] ?? 0) + '%';
 
-        // --- CUACA ---
-        function openCuacaModal() { document.getElementById('cuacaModal').classList.remove('hidden'); }
-        function closeCuacaModal() { document.getElementById('cuacaModal').classList.add('hidden'); }
-
-        async function loadCuacaData(cityName) {
-            const coords = cityCoords[cityName] || cityCoords['Tarakan'];
-            document.getElementById('modalCuacaTitle').innerText = `Cuaca ${cityName} Hari Ini`;
-            document.getElementById('cuacaCityLabel').innerText = `Cuaca ${cityName}`;
-
-            try {
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation_probability&daily=temperature_2m_max&timezone=Asia%2FMakassar`);
-                const data = await res.json();
-
-                if (data.current_weather) {
-                    const temp = Math.round(data.current_weather.temperature) + '°C';
-                    document.getElementById('mCuacaTemp').innerText = temp;
-                    document.getElementById('cuacaTempLabel').innerText = temp;
-                    document.getElementById('mCuacaWind').innerText = data.current_weather.windspeed + ' km/jam';
-
-                    if (data.hourly) {
-                        document.getElementById('mCuacaHumidity').innerText = (data.hourly.relativehumidity_2m[0] ?? 75) + '%';
-                        document.getElementById('mCuacaRain').innerText = (data.hourly.precipitation_probability[0] ?? 0) + '%';
-
-                        let hourlyHtml = '';
-                        const nowHour = new Date().getHours();
-                        for (let i = nowHour; i < nowHour + 8; i++) {
-                            if (data.hourly.time[i]) {
-                                const timeLabel = data.hourly.time[i].split('T')[1].substring(0, 5);
-                                hourlyHtml += `
-                                    <div class="flex-shrink-0 bg-gray-800 p-3 rounded-xl border border-gray-700 text-center w-20 space-y-1">
-                                        <span class="block text-[10px] text-gray-400">${timeLabel}</span>
-                                        <span class="text-xl block">☁️</span>
-                                        <span class="font-extrabold text-xs text-white block">${Math.round(data.hourly.temperature_2m[i])}°</span>
-                                    </div>
-                                `;
-                            }
-                        }
-                        document.getElementById('cuacaHourlyContainer').innerHTML = hourlyHtml;
-                    }
-
-                    let weeklyHtml = '';
-                    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-                    for (let d = 0; d < 7; d++) {
-                        if (data.daily && data.daily.time[d]) {
-                            const dateObj = new Date(data.daily.time[d]);
-                            const dayName = d === 0 ? 'Hari ini' : days[dateObj.getDay()];
-                            weeklyHtml += `
-                                <div class="bg-gray-800/80 p-3 rounded-xl border border-gray-700 flex items-center justify-between text-xs">
-                                    <span class="font-bold text-white w-28">${dayName}</span>
-                                    <span class="text-gray-300">☁️ Berawan</span>
-                                    <span class="font-black text-amber-400">${Math.round(data.daily.temperature_2m_max[d])}°C</span>
+                    let hourlyHtml = '';
+                    const nowHour = new Date().getHours();
+                    for (let i = nowHour; i < nowHour + 8; i++) {
+                        if (data.hourly.time[i]) {
+                            const timeLabel = data.hourly.time[i].split('T')[1].substring(0, 5);
+                            hourlyHtml += `
+                                <div class="flex-shrink-0 bg-gray-800 p-3 rounded-xl border border-gray-700 text-center w-20 space-y-1">
+                                    <span class="block text-[10px] text-gray-400">${timeLabel}</span>
+                                    <span class="text-xl block">☁️</span>
+                                    <span class="font-extrabold text-xs text-white block">${Math.round(data.hourly.temperature_2m[i])}°</span>
                                 </div>
                             `;
                         }
                     }
-                    document.getElementById('cuacaWeeklyContainer').innerHTML = weeklyHtml;
+                    const hourlyContainer = document.getElementById('cuacaHourlyContainer');
+                    if (hourlyContainer) hourlyContainer.innerHTML = hourlyHtml;
                 }
-            } catch (err) { console.error("Gagal load cuaca", err); }
-        }
 
-        function changeCuacaCity(cityName) {
-            loadCuacaData(cityName);
-            document.getElementById('modalCuacaCitySelect').value = cityName;
-        }
+                let weeklyHtml = '';
+                const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                for (let d = 0; d < 7; d++) {
+                    if (data.daily && data.daily.time[d]) {
+                        const dateObj = new Date(data.daily.time[d]);
+                        const dayName = d === 0 ? 'Hari ini' : days[dateObj.getDay()];
+                        weeklyHtml += `
+                            <div class="bg-gray-800/80 p-3 rounded-xl border border-gray-700 flex items-center justify-between text-xs">
+                                <span class="font-bold text-white w-28">${dayName}</span>
+                                <span class="text-gray-300">☁️ Berawan</span>
+                                <span class="font-black text-amber-400">${Math.round(data.daily.temperature_2m_max[d])}°C</span>
+                            </div>
+                        `;
+                    }
+                }
+                const weeklyContainer = document.getElementById('cuacaWeeklyContainer');
+                if (weeklyContainer) weeklyContainer.innerHTML = weeklyHtml;
+            }
+        } catch (err) { console.error("Gagal load cuaca", err); }
+    }
 
-        // LOAD DEFAULT TARAKAN
-        document.addEventListener('DOMContentLoaded', () => {
-            loadSholatData('Tarakan');
-            loadCuacaData('Tarakan');
-        });
-    </script>
+    
+
+    function changeCuacaCity(cityName) {
+        loadCuacaData(cityName);
+        const cuacaSelect = document.getElementById('modalCuacaCitySelect');
+        if (cuacaSelect) cuacaSelect.value = cityName;
+    }
+
+    // LOAD DEFAULT TARAKAN & SET INITIAL RANDOM QUOTE
+    document.addEventListener('DOMContentLoaded', () => {
+        setRandomIslamicQuote();
+        loadSholatData('Tarakan');
+        loadCuacaData('Tarakan');
+    });
+</script>
 </body>
 </html>
