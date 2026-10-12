@@ -21,8 +21,9 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
-# Aktifkan mod_rewrite Apache
-RUN a2enmod rewrite
+# PERBAIKAN MPM APACHE: Matikan mpm_event dan aktifkan mpm_prefork
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite
 
 # Ambil Composer resmi
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
