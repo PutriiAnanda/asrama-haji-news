@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Update & install dependensi sistem (termasuk libpq-dev untuk PostgreSQL Supabase)
+# Install dependensi sistem yang dibutuhkan
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
@@ -40,4 +40,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-EXPOSE 80
+# Script startup untuk mengarahkan Apache ke PORT dari Railway
+CMD sed -i "s/80/${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && apache2-foreground
