@@ -1,5 +1,0 @@
-[providers]
-providers = ['php']
-
-[nixpkgs]
-pkgs = ['php', 'phpExtensions.intl', 'phpExtensions.pdo_pgsql', 'composer']
