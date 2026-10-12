@@ -75,7 +75,7 @@
             "dont-discover": []
         }
     },
-    "config": {
+"config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
     "sort-packages": true,
@@ -84,7 +84,7 @@
         "php-http/discovery": true
     },
     "platform": {
-        "ext-intl": "8.2"
+        "ext-intl": "8.2.0"
     }
 },
     "minimum-stability": "stable",

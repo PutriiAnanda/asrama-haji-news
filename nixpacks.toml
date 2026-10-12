@@ -2,4 +2,4 @@
 providers = ['php']
 
 [nixpkgs]
-pkgs = ['php82', 'php82Extensions.intl', 'php82Extensions.pdo_pgsql', 'composer']
+pkgs = ['php', 'phpExtensions.intl', 'phpExtensions.pdo_pgsql', 'composer']
