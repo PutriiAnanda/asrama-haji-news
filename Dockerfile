@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Update dan install dependensi dengan pembersihan cache agar apt-get tidak gagal
+# Update & install dependensi sistem (termasuk libpq-dev untuk PostgreSQL Supabase)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml2-dev \
     libzip-dev \
     libicu-dev \
+    libpq-dev \
     zip \
     unzip \
     && rm -rf /var/lib/apt/lists/* \
@@ -35,7 +36,7 @@ COPY . .
 # Berikan izin direktori storage dan cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Jalankan composer install dengan aman
+# Jalankan composer install
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
